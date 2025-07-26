@@ -1,9 +1,9 @@
 {
-  "name": "marc.js",
+  "name": "marc-frbr.js",
   "version": "0.1.0",
-  "description": "Parse MARC cataloging records.",
+  "description": "FRBR style clustering for MARC cataloging records.",
   "type": "module",
-  "main": "index.js",
+  "main": "src/cluster/main.js",
   "scripts": {
     "test": "node --experimental-strip-types --test"
   },
@@ -11,7 +11,9 @@
     "library",
     "cataloging",
     "marc",
-    "bibliographic description"
+    "bibliographic description",
+    "cluster",
+    "frbr"
   ],
   "author": "Steve Meyer",
   "license": "MIT",
