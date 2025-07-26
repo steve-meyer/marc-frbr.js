@@ -1,0 +1,21 @@
+{
+  "name": "marc.js",
+  "version": "0.1.0",
+  "description": "Parse MARC cataloging records.",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "node --experimental-strip-types --test"
+  },
+  "keywords": [
+    "library",
+    "cataloging",
+    "marc",
+    "bibliographic description"
+  ],
+  "author": "Steve Meyer",
+  "license": "MIT",
+  "dependencies": {
+    "n-readlines": "^1.0.1"
+  }
+}

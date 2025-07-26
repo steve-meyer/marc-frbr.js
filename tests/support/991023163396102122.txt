@@ -1,0 +1,39 @@
+LEADER 03023cam a2200481Ii 4500
+001 991023163396102122
+005 20220627023615.0
+008 200904s2021    enka          000 0 eng d
+015    $a GBC143216 $2 bnb
+016 7  $a 020135078 $2 Uk
+020    $a 1913029956
+020    $a 9781913029951
+035    $a (OCoLC)1192493942
+035    $a (YBP)16929860
+035    $a (OCoLC)on1192493942
+035    $a (EXLNZ-01UWI_NETWORK)9913529158402121
+035    $a (01UWI_MAD)991023163396102122
+040    $a YDX $b eng $e rda $c YDX $d BDX $d UKMGB $d OCLCO $d OCLCF $d ERASA $e rda $d ILO $d OCLCO $d MYG $d OCLCO $d OCLCQ $d MBB $d GZM
+049    $a GZMA
+050  4 $a ML1380 $b .F45 2021
+082 04 $a 781.648 $2 23
+100 1  $a Fell, Mark, $d 1966- $e artist, $e author.
+245 10 $a Structure and synthesis : $b the anatomy of practice / $c Mark Fell ; edited by Robin Mackay ; design by Joe Gilmore.
+246 30 $a Anatomy of practice
+264  1 $a [Falmouth, United Kingdom] : $b Urbanomic Media Ltd., $c [2021]
+264  2 $a [Cambridge, Massachusetts] : $b The MIT Press
+300    $a 398 pages : $b illustrations ; $c 25 cm
+336    $a text $b txt $2 rdacontent
+336    $a still image $b sti $2 rdacontent
+337    $a unmediated $b n $2 rdamedia
+338    $a volume $b nc $2 rdacarrier
+520 8  $a In this extensive anthology, Mark Fell, a pioneering artist known for his sound installations and his musical work solo and as part of SND and Sensate Focus, assembles a collection of diverse materials charting his defiantly unorthodox thinking on time, structure, technology, and the relation between academic and popular electronic music. An amalgam of workbook and manifesto, featuring a collection of interleaved statements, diagrammatic scores, and instructional texts, Structure and Synthesis is a direct engagement with Fell's original thinking and his continual provocations in regard to "experimental" music. Alongside reflections on theory and practice, the volume includes exercises for dismantling musical expertise, habits, and intuitions, documenting Fell's explorations of the peripheries of rhythm, shape, and time in perception and performance. Long-term collaborator designer Joe Gilmore provides a striking graphic context for Fell's evolving thinking and the methods and structures he has developed through his solo and collaborative work.
+650  0 $a Electronic music.
+650  0 $a Avant-garde (Music)
+650  0 $a Electronica (Music)
+650  6 $a Électronica (Musique) $0 (CaQQLa)000268631
+650  6 $a Musique expérimentale. $0 (CaQQLa)201-0207975
+650  7 $a Avant-garde (Music) $2 fast $0 (OCoLC)fst00824287
+650  7 $a Electronica (Music) $2 fast $0 (OCoLC)fst01765256
+700 1  $a Mackay, Robin $c (Philosopher) $e editor.
+700 1  $a Gilmore, Joe, $d 1968- $e designer.
+852 0  $8 22978729560002122 $b MUSIC $c stk $h ML1380 $i .F45 2021
+856 40 $u https://www.youtube.com/playlist?list=PL7JuwrEI_5I1_ynOQ_0H4vqSXtD-4gePd $y An accompanying playlist is available on our YouTube channel, featuring tracks mentioned and discussed in the book.
