@@ -2,15 +2,15 @@ import * as fs from "node:fs";
 import * as path from "node:path";
 import assert from "node:assert";
 import { describe, it } from "node:test";
-import { Record } from "../src/marc/record.js";
-import { getMarcRecord } from "./test_helpers.js";
+import { MarcRecord } from "../src/marc/record";
+import { getMarcRecord } from "./test_helpers";
 
 
 describe("Record", () => {
   describe("loading a MARC record", () => {
     const record = getMarcRecord("991023163396102122");
 
-    it("is a marc.js Record", assert(record instanceof Record));
+    it("is a marc.js Record", () => assert(record instanceof MarcRecord));
 
     it("has a leader", () => assert(record.leader === "03023cam a2200481Ii 4500"));
 
@@ -30,9 +30,9 @@ describe("Record", () => {
 
       assert(title.i1 === "1");
       assert(title.i2 === "0");
-      assert(title.subfields.find(sf => sf.code == "a").value === "Structure and synthesis :");
-      assert(title.subfields.find(sf => sf.code == "b").value === "the anatomy of practice /");
-      assert(title.subfields.find(sf => sf.code == "c").value === "Mark Fell ; edited by Robin Mackay ; design by Joe Gilmore.");
+      assert(title.subfields.find(sf => sf.code == "a")!.value === "Structure and synthesis :");
+      assert(title.subfields.find(sf => sf.code == "b")!.value === "the anatomy of practice /");
+      assert(title.subfields.find(sf => sf.code == "c")!.value === "Mark Fell ; edited by Robin Mackay ; design by Joe Gilmore.");
     });
 
     it("allows multiple instances of the same tag", () => {

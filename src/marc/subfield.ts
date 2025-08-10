@@ -3,7 +3,7 @@ export class Subfield {
   value;
 
 
-  constructor(code, value) {
+  constructor(code: string, value: string) {
     this.code  = code;
     this.value = value;
   }

@@ -1,9 +1,14 @@
 import { Transform } from "node:stream";
-import { Record, END_OF_RECORD } from "./record.js";
+import { MarcRecord, END_OF_RECORD } from "./record";
 
 
 export class MarcReader extends Transform {
-  constructor(options = {}) {
+  encoding;
+  buffer;
+  createdAt;
+
+
+  constructor(options: any = {}) {
     options.objectMode = true;
     super(options);
 
@@ -13,7 +18,7 @@ export class MarcReader extends Transform {
   }
 
 
-  _transform(chunk, encoding, callback) {
+  _transform(chunk: Buffer, encoding: BufferEncoding, callback: Function) {
     // Add new data to the buffer
     this.buffer += chunk.toString(encoding);
 
@@ -21,7 +26,9 @@ export class MarcReader extends Transform {
     const binaryRecords = this.buffer.split(END_OF_RECORD);
 
     // Last record might be incomplete, save for next chunk
-    this.buffer = binaryRecords.pop();
+    const buffer = binaryRecords.pop();
+    if (buffer !== undefined)
+      this.buffer = buffer;
 
     // Process binary records
     for (const binaryRecord of binaryRecords) {
@@ -29,17 +36,17 @@ export class MarcReader extends Transform {
       if (binaryRecord.trim() === "") continue;
 
       // Push the parsed record to the consumer.
-      this.push(new Record(Buffer.from(binaryRecord)));
+      this.push(new MarcRecord(Buffer.from(binaryRecord)));
     }
 
     callback();
   }
 
 
-  _flush(callback) {
+  _flush(callback: Function) {
     // Process any remaining data
     if (this.buffer.trim() !== "")
-      this.push(new Record(Buffer.from(this.buffer)));
+      this.push(new MarcRecord(Buffer.from(this.buffer)));
 
     callback();
   }

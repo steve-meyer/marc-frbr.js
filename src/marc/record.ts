@@ -1,4 +1,5 @@
-import { DataField } from "./data_field.js";
+import { DataField } from "./data_field";
+import { Subfield } from "./subfield";
 
 
 const LEADER_LENGTH          = 24;
@@ -12,13 +13,14 @@ export const END_OF_FIELD       = "\x1E";
 export const END_OF_RECORD      = "\x1D";
 
 
-export class Record {
-  leader;
-  controlFields = {};
-  dataFields = {};
+export class MarcRecord {
+  raw: Buffer;
+  leader = "";
+  controlFields: Record<string, string[]> = {};
+  dataFields: Record<string, DataField[]> = {};
 
 
-  constructor(raw) {
+  constructor(raw: Buffer) {
     this.raw = raw;
     this.#parse();
   }
@@ -39,7 +41,7 @@ export class Record {
     Object.keys(this.dataFields).sort().forEach(field => {
       this.dataFields[field].forEach(dataField => {
         str += `${field} ${dataField.i1}${dataField.i2}`;
-        dataField.subfields.forEach(subfield => str += ` $${subfield.code} ${subfield.value}`);
+        dataField.subfields.forEach((subfield: Subfield) => str += ` $${subfield.code} ${subfield.value}`);
         str += "\n";
       });
     });
@@ -56,11 +58,11 @@ export class Record {
 
     for (let i = 0; i < directory.length - 1; i += DIRECTORY_ENTRY_LENGTH) {
       const fieldTag    = directory.slice(i, i + TAG_LENGTH).toString();
-      const fieldLength = parseInt(directory.slice(i + TAG_LENGTH, i + TAG_LENGTH + FIELD_LENGTH));
+      const fieldLength = parseInt(directory.slice(i + TAG_LENGTH, i + TAG_LENGTH + FIELD_LENGTH).toString());
       const address     = parseInt(directory.slice(
         i + TAG_LENGTH + FIELD_LENGTH,
         i + TAG_LENGTH + FIELD_LENGTH + ADDRESS_LENGTH
-      ));
+      ).toString());
 
       if (fieldTag < "010") {
         if (this.controlFields[fieldTag] === undefined) this.controlFields[fieldTag] = new Array();

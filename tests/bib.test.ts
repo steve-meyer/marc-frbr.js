@@ -1,18 +1,18 @@
 import assert from "node:assert";
 import { describe, it } from "node:test";
-import { getMarcRecord } from "./test_helpers.js";
-import { Bib } from "../src/frbr/bib.js";
+import { getMarcRecord } from "./test_helpers";
+import { Bib } from "../src/frbr/bib";
 
 
 describe("Bib", () => {
   describe("when loaded from a Record", () => {
     const bib = new Bib(getMarcRecord("991023163396102122"));
 
-    it("has an ID", assert(bib.id === "991023163396102122"));
+    it("has an ID", () => assert(bib.id === "991023163396102122"));
 
-    it("has a pub date", assert(bib.pubDate() === "2021"));
+    it("has a pub date", () => assert(bib.pubDate() === "2021"));
 
-    it("has a merge key", assert(bib.titleMergeKey() === "e1a757d416ec1d8750206ca154661167c13df861"));
+    it("has a merge key", () => assert(bib.titleMergeKey() === "e1a757d416ec1d8750206ca154661167c13df861"));
 
     it("will NFC normalize the title data used by the merge key", () => {
       const bib1 = new Bib(getMarcRecord("991021977068202122"));

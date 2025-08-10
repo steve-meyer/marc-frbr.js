@@ -1,7 +1,7 @@
 import assert from "node:assert";
 import { describe, it } from "node:test";
-import { Record } from "../src/marc/record.js";
-import { readMarcFromStream } from "./test_helpers.js";
+import { MarcRecord } from "../src/marc/record";
+import { readMarcFromStream } from "./test_helpers";
 
 
 describe("MarcReader", () => {
@@ -11,7 +11,7 @@ describe("MarcReader", () => {
     it("reads all records in the file", () => assert(records.length === 3));
 
     it("returns marc.js Record objects", () => {
-      records.forEach(record => assert(record instanceof Record))
+      records.forEach(record => assert(record instanceof MarcRecord));
     });
 
     it("encounters the records in order", () => {

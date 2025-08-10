@@ -1,11 +1,12 @@
 import { createHash } from "node:crypto";
+import { MarcRecord } from "../marc/record";
 
 
 export class Bib {
   marcRecord;
 
 
-  constructor(marcRecord) {
+  constructor(marcRecord: MarcRecord) {
     this.marcRecord = marcRecord;
   }
 
@@ -26,8 +27,8 @@ export class Bib {
 
 
   pubDate() {
-    if (this.marcRecord.controlFields["008"] && this.marcRecord.controlFields["008"][0].length > 11)
-      return this.marcRecord.controlFields["008"][0].slice(7, 11);
+    if (this.marcRecord.controlFields["008"] && this.marcRecord.controlFields["008"][0]!.length > 11)
+      return this.marcRecord.controlFields["008"][0]!.slice(7, 11);
     else
       return "";
   }
@@ -47,8 +48,10 @@ export class Bib {
     prehashedKey += this.pubDate() + " ";
     prehashedKey += prehashedKey === " " ? "---- " : "";
 
+    const titleStmt = this.marcRecord.dataFields["245"]![0]!;
     prehashedKey += Bib.removeTrailingPunctuation(
-      this.marcRecord.dataFields["245"][0].subfields.reduce((mergeKeyTitle, subfield) => {
+      // this.marcRecord.dataFields["245"]
+      titleStmt.subfields.reduce((mergeKeyTitle, subfield) => {
         if (subfield.code === "a" || subfield.code === "k" || subfield.code === "n" || subfield.code === "p")
           mergeKeyTitle += subfield.value;
 
@@ -101,27 +104,27 @@ export class Bib {
   }
 
 
-  getIsbn(field, subfieldCodes) {
+  getIsbn(field: string, subfieldCodes: string[]) {
     return this.getValuesBySubfieldCodes(field, subfieldCodes).map(val => val.replace(/[^0-9X]/g, ""));
   }
 
 
   getPrimaryOclcNumbers() {
-    return this.getOclcNumbers("035", "a");
+    return this.getOclcNumbers("035", ["a"]);
   }
 
 
   getInvalidOclcNumbers() {
-    return this.getOclcNumbers("035", "z");
+    return this.getOclcNumbers("035", ["z"]);
   }
 
 
   getRelatedOclcNumbers() {
-    return this.getOclcNumbers("776", "w");
+    return this.getOclcNumbers("776", ["w"]);
   }
 
 
-  getOclcNumbers(field, subfieldCodes) {
+  getOclcNumbers(field: string, subfieldCodes: string[]) {
     return [
       // Spread back to a regular Array
       // Convert to a Set to unique the values
@@ -134,7 +137,7 @@ export class Bib {
   }
 
 
-  getValuesBySubfieldCodes(field, subfieldCodes) {
+  getValuesBySubfieldCodes(field: string, subfieldCodes: string[]) {
     if (!this.marcRecord.dataFields[field]) return [];
 
     return this.marcRecord.dataFields[field].flatMap(field => {
@@ -145,7 +148,7 @@ export class Bib {
   }
 
 
-  static removeTrailingPunctuation(str) {
+  static removeTrailingPunctuation(str: string) {
     if (str && str.length > 1 &&
       (str.endsWith(":") || str.endsWith(",") || str.endsWith(".") ||
        str.endsWith("/") || str.endsWith("=") || str.endsWith(";")))

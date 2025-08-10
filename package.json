@@ -5,7 +5,7 @@
   "type": "module",
   "main": "src/cluster/main.js",
   "scripts": {
-    "test": "node --experimental-strip-types --test"
+    "test": "node --import tsx --test tests/**/*.test.ts"
   },
   "keywords": [
     "library",
@@ -24,6 +24,7 @@
     "@tsconfig/node24": "^24.0.1",
     "@types/node": "^24.2.1",
     "esbuild": "^0.25.8",
+    "tsx": "^4.20.3",
     "typescript": "^5.9.2"
   }
 }
