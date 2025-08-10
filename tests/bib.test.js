@@ -13,6 +13,13 @@ describe("Bib", () => {
     it("has a pub date", assert(bib.pubDate() === "2021"));
 
     it("has a merge key", assert(bib.titleMergeKey() === "e1a757d416ec1d8750206ca154661167c13df861"));
+
+    it("will NFC normalize the title data used by the merge key", () => {
+      const bib1 = new Bib(getMarcRecord("991021977068202122"));
+      const bib2 = new Bib(getMarcRecord("991021966469802122"));
+
+      assert(bib1.titleMergeKey() === bib2.titleMergeKey());
+    });
   });
 
 

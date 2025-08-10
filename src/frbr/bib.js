@@ -54,7 +54,7 @@ export class Bib {
 
         return mergeKeyTitle;
       }, "")
-    ).toLowerCase();
+    ).toLowerCase().normalize("NFC");
 
     return createHash("sha1").update(prehashedKey).digest("hex");
   }
