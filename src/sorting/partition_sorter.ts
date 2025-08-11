@@ -6,10 +6,10 @@ import { FileSorter } from "./file_sorter.js";
 
 
 export class PartitionSorter {
-  partitionsDirectory;
+  partitionsDirectory: string;
 
 
-  constructor(partitionsDirectory) {
+  constructor(partitionsDirectory: string) {
     this.partitionsDirectory = partitionsDirectory;
   }
 
@@ -19,7 +19,7 @@ export class PartitionSorter {
       return new Promise((resolve, reject) => {
         try {
           new FileSorter(filepath).sort();
-          resolve();
+          resolve("finished");
         } catch (error) {
           console.log(error);
           reject(`Encountered problem sorting file ${filepath}`);

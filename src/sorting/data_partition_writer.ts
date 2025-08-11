@@ -9,16 +9,24 @@ export const HEX_PREFIXES = [...Array(10).keys()]
                             .concat([...Array(6).keys()].map(n => String.fromCharCode('a'.charCodeAt(0) + n)));
 
 
+type WriteStreamEntry = {
+  prefix: string,
+  fileCount: number,
+  recordCount: number,
+  stream: fs.WriteStream
+}
+
+
 export class DataPartitionWriter {
   outputDir;
-  writeStreams;
+  writeStreams: Record<string, WriteStreamEntry>;
 
 
-  constructor(outputDir) {
+  constructor(outputDir: string) {
     this.outputDir = outputDir;
     this.#createSubDirectories();
 
-    this.writeStreams = HEX_PREFIXES.reduce((writeStreams, prefix) => {
+    this.writeStreams = HEX_PREFIXES.reduce((writeStreams: Record<string, WriteStreamEntry>, prefix) => {
       writeStreams[prefix] = {
         prefix: prefix,
         fileCount: 0,
@@ -30,7 +38,7 @@ export class DataPartitionWriter {
   }
 
 
-  write(str) {
+  write(str: string) {
     if (this.writeStreams[str[0]].recordCount === MAX_RECORDS_PER_FILE) {
       const prefix = str[0];
       this.writeStreams[prefix].stream.close();

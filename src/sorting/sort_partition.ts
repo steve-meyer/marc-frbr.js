@@ -21,4 +21,4 @@ while (mergeableFilepaths.length > 1) {
   mergeableFilepaths.push(outputFilepath);
 }
 
-parentPort.postMessage(`${workerData.prefix} used ${process.memoryUsage().heapUsed / 1024 / 1024} MB`);
+parentPort!.postMessage(`${workerData.prefix} used ${process.memoryUsage().heapUsed / 1024 / 1024} MB`);

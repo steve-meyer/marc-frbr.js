@@ -2,18 +2,24 @@ import { Transform } from "node:stream";
 
 
 export class DataStreamReader extends Transform {
-  constructor(options = {}) {
+  encoding = "utf8";
+  buffer: string;
+  createdAt: Date;
+  clusters: Record<string, string[]>;
+
+
+  constructor(options: any = {}) {
     options.objectMode = true;
     super(options);
 
-    this.encoding  = "utf8";
+    // this.encoding  = "utf8";
     this.buffer    = "";
     this.createdAt = new Date();
     this.clusters = {};
   }
 
 
-  _transform(chunk, encoding, callback) {
+  _transform(chunk: Buffer, encoding: BufferEncoding, callback: Function) {
     // Add new data to the buffer
     this.buffer += chunk.toString(encoding);
 
@@ -21,7 +27,9 @@ export class DataStreamReader extends Transform {
     const lines = this.buffer.split("\n");
 
     // Last record might be incomplete, save for next chunk
-    this.buffer = lines.pop();
+    const line = lines.pop();
+    if (line !== undefined)
+      this.buffer = line;
 
     // Process binary records
     for (const line of lines) {
@@ -51,7 +59,7 @@ export class DataStreamReader extends Transform {
   }
 
 
-  _flush(callback) {
+  _flush(callback: Function) {
     // Process any remaining data
     if (Object.keys(this.clusters).length > 0) {
       const nextKey = Object.keys(this.clusters).sort()[0];

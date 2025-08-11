@@ -9,12 +9,12 @@ const TARGET_COMES_AFTER  = -1,
 
 
 export class SortedFileMerger {
-  inputFilepath1;
-  inputFilepath2;
-  outputFilepath;
+  inputFilepath1: string;
+  inputFilepath2: string;
+  outputFilepath: string;
 
 
-  constructor(inputFilepath1, inputFilepath2, outputFilepath) {
+  constructor(inputFilepath1: string, inputFilepath2: string, outputFilepath: string) {
     this.inputFilepath1 = inputFilepath1;
     this.inputFilepath2 = inputFilepath2;
     this.outputFilepath = outputFilepath;
@@ -64,14 +64,14 @@ export class SortedFileMerger {
     }
 
     fs.closeSync(fd);
-    if (reader1.fd) {
-      console.log("Closing reader1");
-      reader1.close();
-    }
-    if (reader2.fd) {
-      console.log("Closing reader2");
-      reader2.close();
-    }
+    // if (reader1.fd) {
+    //   console.log("Closing reader1");
+    //   reader1.close();
+    // }
+    // if (reader2.fd) {
+    //   console.log("Closing reader2");
+    //   reader2.close();
+    // }
     fs.unlinkSync(this.inputFilepath1);
     fs.unlinkSync(this.inputFilepath2);
   }

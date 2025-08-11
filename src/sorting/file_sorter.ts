@@ -2,11 +2,11 @@ import * as fs from "node:fs";
 
 
 export class FileSorter {
-  readStream;
-  lines;
+  filepath: string;
+  lines: string[];
 
 
-  constructor(filepath) {
+  constructor(filepath: string) {
     this.filepath = filepath;
     this.lines = new Array();
   }

@@ -22,6 +22,7 @@
   },
   "devDependencies": {
     "@tsconfig/node24": "^24.0.1",
+    "@types/n-readlines": "^1.0.6",
     "@types/node": "^24.2.1",
     "esbuild": "^0.25.8",
     "tsx": "^4.20.3",
