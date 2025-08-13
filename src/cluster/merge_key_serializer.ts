@@ -1,21 +1,25 @@
 import * as fs from "node:fs";
-import { MarcReader } from "../marc/marc_reader.js";
-import { Bib } from "../frbr/bib.js";
-import { DataPartitionWriter } from "../sorting/data_partition_writer.js";
+import { MarcReader } from "../marc/marc_reader";
+import { Bib } from "../frbr/bib";
+import { DataPartitionWriter } from "../sorting/data_partition_writer";
+import { MarcRecord } from "../marc/record";
 
 
 export class MergeKeySerializer {
-  marcFilepath;
-  outputDir;
-  writer;
-  recordCount;
+  marcFilepath: string;
+  outputDir: string;
+  writer: DataPartitionWriter;
+  recordCount: number;
+  createdAt: Date;
+  finish: Date | undefined;
 
 
-  constructor(marcFilepath, outputDir) {
+  constructor(marcFilepath: string, outputDir: string) {
     this.marcFilepath = marcFilepath;
     this.outputDir    = outputDir;
     this.writer       = new DataPartitionWriter(this.outputDir);
     this.recordCount  = 0;
+    this.createdAt    = new Date();
   }
 
 
@@ -39,7 +43,7 @@ export class MergeKeySerializer {
    * Called as an arrow function by this.reserialize() so the value of this in #processData()
    * is the MergeKeyReserializer.
    */
-  #processData(record) {
+  #processData(record: MarcRecord) {
     this.recordCount++;
 
     const bib = new Bib(record);
@@ -59,6 +63,6 @@ export class MergeKeySerializer {
 
     console.log("Created at:", this.createdAt);
     console.log("Finished:  ", this.finish);
-    console.log("Time (seconds):", (this.finish - this.createdAt) / 1000);
+    console.log("Time (seconds):", (this.finish.getTime() - this.createdAt.getTime()) / 1000);
   }
 }

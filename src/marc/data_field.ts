@@ -1,5 +1,5 @@
-import { SUBFIELD_INDICATOR } from "./record.js";
-import { Subfield } from "./subfield.js";
+import { SUBFIELD_INDICATOR } from "./record";
+import { Subfield } from "./subfield";
 
 
 export class DataField {

@@ -1,8 +1,8 @@
 import * as fs from "node:fs";
 import * as path from "node:path";
 import { Worker } from "node:worker_threads";
-import { HEX_PREFIXES } from "./data_partition_writer.js";
-import { FileSorter } from "./file_sorter.js";
+import { HEX_PREFIXES } from "./data_partition_writer";
+import { FileSorter } from "./file_sorter";
 
 
 export class PartitionSorter {
@@ -35,7 +35,7 @@ export class PartitionSorter {
         console.log(`Spawning worker for ${prefix}`);
 
         const worker = new Worker(
-          path.resolve(import.meta.dirname, "sort_partition.js"),
+          path.resolve(import.meta.dirname, "sort_partition"),
           { workerData: { partitionsDirectory: this.partitionsDirectory, prefix: prefix, index: i } }
         );
 

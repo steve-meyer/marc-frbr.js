@@ -1,6 +1,5 @@
 import * as fs from "node:fs";
-import LineByLine from "n-readlines";
-const BufferedLineReader = LineByLine;
+import { BufferedLineReader } from "./buffered_line_reader";
 
 
 const TARGET_COMES_AFTER  = -1,
@@ -23,15 +22,15 @@ export class SortedFileMerger {
 
   merge() {
     console.log(`Starting data merge for \n  ${this.inputFilepath1} \n  ${this.inputFilepath2} \n to \n  ${this.outputFilepath}`);
-    const reader1 = new BufferedLineReader(this.inputFilepath1, {readChunk: 256 * 1024});
-    const reader2 = new BufferedLineReader(this.inputFilepath2, {readChunk: 256 * 1024});
+    const reader1 = new BufferedLineReader(this.inputFilepath1);
+    const reader2 = new BufferedLineReader(this.inputFilepath2);
     const fd      = fs.openSync(this.outputFilepath, "w");
 
     let line1 = reader1.next();
     let line2 = reader2.next();
 
     while (line1 && line2) {
-      switch(line1.slice(0, 40).compare(line2.slice(0, 40))) {
+      switch(line1.slice(0, 40).localeCompare(line2.slice(0, 40))) {
 
         case TARGET_COMES_AFTER:
           fs.writeSync(fd, line1 + "\n");
@@ -64,14 +63,6 @@ export class SortedFileMerger {
     }
 
     fs.closeSync(fd);
-    // if (reader1.fd) {
-    //   console.log("Closing reader1");
-    //   reader1.close();
-    // }
-    // if (reader2.fd) {
-    //   console.log("Closing reader2");
-    //   reader2.close();
-    // }
     fs.unlinkSync(this.inputFilepath1);
     fs.unlinkSync(this.inputFilepath2);
   }

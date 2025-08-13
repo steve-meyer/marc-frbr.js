@@ -1,6 +1,6 @@
-import { MergeKeySerializer } from "./merge_key_serializer.js";
-import { PartitionSorter } from "../sorting/partition_sorter.js";
-import { WorkSetsGenerator } from "./work_sets_generator.js";
+import { MergeKeySerializer } from "./merge_key_serializer";
+import { PartitionSorter } from "../sorting/partition_sorter";
+import { WorkSetsGenerator } from "./work_sets_generator";
 
 
 const marcFilepath = process.argv[2];
@@ -14,4 +14,4 @@ serializer.generateAsync()
   .then(() => sorter.sortPartitionFilesAsync())
   .then(() => sorter.sortPartitionsAsync())
   .then(() => generator.clusterAsync())
-  .catch((err) => console.error(err));
+  .catch((err: Error) => console.error(err));

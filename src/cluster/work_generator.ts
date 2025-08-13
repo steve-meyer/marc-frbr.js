@@ -1,13 +1,13 @@
 import * as fs from "node:fs";
-import { DataStreamReader } from "../sorting/data_stream_reader.js";
+import { DataStreamReader } from "../sorting/data_stream_reader";
 
 
 export class WorkGenerator {
-  workCandidatesFilepath;
-  workEntitiesFilepath;
+  workCandidatesFilepath: string;
+  workEntitiesFilepath: string;
 
 
-  constructor(workCandidatesFilepath, workEntitiesFilepath) {
+  constructor(workCandidatesFilepath: string, workEntitiesFilepath: string) {
     console.log(workCandidatesFilepath, workEntitiesFilepath)
     this.workCandidatesFilepath = workCandidatesFilepath;
     this.workEntitiesFilepath   = workEntitiesFilepath;
@@ -30,7 +30,7 @@ export class WorkGenerator {
   }
 
 
-  writeBibClusters(rawRecords, writeStream) {
+  writeBibClusters(rawRecords: string[], writeStream: fs.WriteStream) {
     const clusterCandidates = rawRecords.map(r => JSON.parse(r));
 
     const candidatesByBibId = clusterCandidates.reduce((candidatesByBibId, record) => {
@@ -42,17 +42,17 @@ export class WorkGenerator {
 
     return bibIdClusters.forEach(bibIdCluster => {
       const work = new Array();
-      bibIdCluster.forEach(bibId => work.push(candidatesByBibId[bibId]));
+      bibIdCluster.forEach((bibId: string) => work.push(candidatesByBibId[bibId]));
       writeStream.write( JSON.stringify(work) + "\n" );
     });
   }
 
 
-  clusterBibIds(clusterCandidates) {
+  clusterBibIds(clusterCandidates: any) {
     // works is an Array of Sets, grouped clusters of bib ID Strings
     const works = new Array();
 
-    clusterCandidates.forEach(candidate => {
+    clusterCandidates.forEach((candidate: any) => {
       // Before processing each candidate, identify the already merged IDs. The current
       // candidate could have already been added to a cluster while the loop was processing
       // a candidate that shares its merge IDs
@@ -69,7 +69,7 @@ export class WorkGenerator {
 
         // For all bibs related by merge ID, add it to the current work set.
         const mergeIds = this.gatherMergeIds(clusterCandidates, candidate, new Set());
-        clusterCandidates.forEach(c => {
+        clusterCandidates.forEach((c: any) => {
           if (mergeIds.intersection(new Set(c.merge_ids)).size > 0)
             work.add(c.id);
         });
@@ -81,16 +81,16 @@ export class WorkGenerator {
   }
 
 
-  gatherMergeIds(candidates, currentCandidate, mergeIds) {
-    currentCandidate.merge_ids.filter(id => !mergeIds.has(id)).forEach(id => {
+  gatherMergeIds(candidates: any, currentCandidate: any, mergeIds: Set<string>) {
+    currentCandidate.merge_ids.filter((id: string) => !mergeIds.has(id)).forEach((id: string) => {
       // Add the current candidate merge IDs to the Set
       mergeIds.add(id);
 
       // For any other candidates that have overlapping merge IDs...
-      const overlapCandidates = candidates.filter(bib => bib.merge_ids.includes(id));
+      const overlapCandidates = candidates.filter((bib: any) => bib.merge_ids.includes(id));
 
       // recursively gather their merge IDs.
-      overlapCandidates.forEach(overlapCandidate => this.gatherMergeIds(candidates, overlapCandidate, mergeIds));
+      overlapCandidates.forEach((overlapCandidate: any) => this.gatherMergeIds(candidates, overlapCandidate, mergeIds));
     });
 
     return mergeIds;

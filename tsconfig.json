@@ -1,7 +1,10 @@
 {
+  "compilerOptions": {
+    "module": "es2022",
+    "moduleResolution": "node"
+  },
   "extends": "@tsconfig/node24/tsconfig.json",
   "include": [
-    "src/**/*",
-    "*.ts"
+    "src/**/*"
   ]
 }

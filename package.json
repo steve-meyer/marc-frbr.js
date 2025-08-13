@@ -3,8 +3,13 @@
   "version": "0.1.0",
   "description": "FRBR style clustering for MARC cataloging records.",
   "type": "module",
-  "main": "src/cluster/main.js",
+  "main": "dist/main.js",
   "scripts": {
+    "build": "npm run build_workers && npm run build_main",
+    "build_main": "esbuild src/cluster/main.ts --bundle --platform=node --format=esm --outfile=dist/main.js",
+    "build_workers": "npm run build_partition_sorting && npm run build_candidate_processing",
+    "build_candidate_processing": "esbuild src/cluster/process_work_candidates.ts --bundle --platform=node --format=esm --outfile=dist/process_work_candidates.js",
+    "build_partition_sorting": "esbuild src/sorting/sort_partition.ts --bundle --platform=node --format=esm --outfile=dist/sort_partition.js",
     "test": "node --import tsx --test tests/**/*.test.ts"
   },
   "keywords": [
@@ -17,12 +22,8 @@
   ],
   "author": "Steve Meyer",
   "license": "MIT",
-  "dependencies": {
-    "n-readlines": "^1.0.1"
-  },
   "devDependencies": {
     "@tsconfig/node24": "^24.0.1",
-    "@types/n-readlines": "^1.0.6",
     "@types/node": "^24.2.1",
     "esbuild": "^0.25.8",
     "tsx": "^4.20.3",
