@@ -1,5 +1,5 @@
 import * as fs from "node:fs";
-import { DataStreamReader } from "../sorting/data_stream_reader";
+import { DataStreamReader } from "../util/data_stream_reader";
 
 
 export class WorkGenerator {

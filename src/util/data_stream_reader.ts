@@ -8,11 +8,9 @@ export class DataStreamReader extends Transform {
   clusters: Record<string, string[]>;
 
 
-  constructor(options: any = {}) {
-    options.objectMode = true;
-    super(options);
+  constructor() {
+    super({objectMode: true});
 
-    // this.encoding  = "utf8";
     this.buffer    = "";
     this.createdAt = new Date();
     this.clusters = {};
