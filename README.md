@@ -2,6 +2,33 @@
 
 This code base provides a lightweight MARC FRBRization implementation.
 
+## Installation
+
+This codebase is written in Typescript. You will need to:
+
+1. Download the codebase
+2. Install the development dependencies
+3. Build/transpile the Typescript to runnable JavaScript
+
+```bash
+$ git clone git@github.com:steve-meyer/marc-frbr.js.git
+$ cd marc-frbr.js/
+$ npm install
+$ npm run build
+```
+
+This will create a `dist` directory in the project root where you can run the code...
+
+### Usage
+
+Run the main script:
+
+```bash
+$ node dist/main.js /path/to/input/marc/file.mrc /path/to/output/data/directory
+```
+
+The output data will be generated in the path supplied. The data directory will contain JSON Lines files using the data structure described below.
+
 ## Functional Requirements for Bibliographic Records (FRBR)
 
 FRBR is a grouping data model for library bibliographic description. This library is loosely based on FRBR Group 1, the WEMI model, which describes a data model hierarchy for creative works:
