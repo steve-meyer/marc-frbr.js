@@ -6,7 +6,7 @@ export class BufferedLineReader {
   eofReached = false;
   linesCache: Buffer[] = new Array<Buffer>();
   fdPosition = 0;
-  readChunk = 256 * 1024;
+  chunkByteSize = 256 * 1024;
   newLineCharacter = 0x0a;
 
 
@@ -62,20 +62,20 @@ export class BufferedLineReader {
   _readChunk(lineLeftovers?: Buffer) {
     let totalBytesRead = 0;
 
-    let bytesRead;
+    let chunkBytesRead = 0;
     const buffers = new Array<Buffer>();
     do {
       if (this.fd !== null) {
-        const readBuffer = Buffer.alloc(this.readChunk);
-        bytesRead = fs.readSync(this.fd, readBuffer, 0, this.readChunk, this.fdPosition);
-        totalBytesRead = totalBytesRead + bytesRead;
-        this.fdPosition = this.fdPosition + bytesRead;
-        buffers.push(readBuffer);
+        const chunkBuffer = Buffer.alloc(this.chunkByteSize);
+        chunkBytesRead    = fs.readSync(this.fd, chunkBuffer, 0, this.chunkByteSize, this.fdPosition);
+        totalBytesRead    = totalBytesRead + chunkBytesRead;
+        this.fdPosition   = this.fdPosition + chunkBytesRead;
+        buffers.push(chunkBuffer);
       }
-    } while (bytesRead && this._newLineIndex(buffers[buffers.length - 1]) === -1);
+    } while (chunkBytesRead !== 0 && this._newLineIndex(buffers[buffers.length - 1]) === -1);
     let bufferData = Buffer.concat(buffers);
 
-    if (bytesRead === undefined || bytesRead < this.readChunk) {
+    if (chunkBytesRead === 0 || chunkBytesRead < this.chunkByteSize) {
       this.eofReached = true;
       bufferData = bufferData.subarray(0, totalBytesRead);
     }
