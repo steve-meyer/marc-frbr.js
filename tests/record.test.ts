@@ -10,7 +10,7 @@ describe("Record", () => {
   describe("loading a MARC record", () => {
     const record = getMarcRecord("991023163396102122");
 
-    it("is a marc.js Record", () => assert(record instanceof MarcRecord));
+    it("is a MarcRecord", () => assert(record instanceof MarcRecord));
 
     it("has a leader", () => assert(record.leader === "03023cam a2200481Ii 4500"));
 

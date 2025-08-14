@@ -10,7 +10,7 @@ describe("MarcReader", () => {
 
     it("reads all records in the file", () => assert(records.length === 3));
 
-    it("returns marc.js Record objects", () => {
+    it("returns MarcRecord objects", () => {
       records.forEach(record => assert(record instanceof MarcRecord));
     });
 

@@ -30,6 +30,20 @@ export class BufferedLineReader {
   }
 
 
+  /**
+   * Read the next line of the file.
+   *
+   * Note: clients should test for `undefined` specifically and not falsyness because JavaScript treats the
+   * empty string as falsy. Otherwise the client may risk stopping reading a text file containing blank
+   * lines prematurely.
+   *
+   * @example
+   *
+   *   const reader = new BufferedLineReader("/path/to/file.txt");
+   *   while ((line = reader.next()) !== undefined) { console.log(line); }
+   *
+   * @returns the next line in the file as utf-8 string identified by the newline character, but not including it, or `undefined` if there are no more lines
+   */
   next() {
     if (!this.fd || (this.eofReached && this.linesCache.length === 0)) return;
 
