@@ -1,7 +1,27 @@
 import { Transform } from "node:stream";
 
 
-export class DataStreamReader extends Transform {
+/**
+ * A Node.js `Transform` streaming reader for clustered records in the following format:
+ *
+ * ```
+ * {identifier-1}\t{string}\n
+ * {identifier-1}\t{string}\n
+ * {identifier-2}\t{string}\n
+ * ```
+ *
+ * In this example, there are two clusters, one for `identifier-1` with two records and a second
+ * single record cluster for `identifier-2`.
+ *
+ * * Each line in the input file is a tab delimited pair containing an identifier and a record.
+ * * All adjacent lines with the same identifier form a cluster.
+ * * Lines in the file must be sorted by the identifier.
+ *
+ * When a read stream is piped to a `SortedClusterReader`, the data will be passed as a two element
+ * `Array`. The first element will be the clustering identifier. The second element will be an Array
+ * of records that cluster under the identifier.
+ */
+export class SortedClusterReader extends Transform {
   encoding = "utf8";
   buffer: string;
   createdAt: Date;

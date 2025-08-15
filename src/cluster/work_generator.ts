@@ -1,5 +1,5 @@
 import * as fs from "node:fs";
-import { DataStreamReader } from "../util/data_stream_reader";
+import { SortedClusterReader } from "../util/sorted_cluster_reader";
 
 
 export class WorkGenerator {
@@ -17,7 +17,7 @@ export class WorkGenerator {
   clusterAsync() {
     return new Promise((resolve, reject) => {
       const readStream  = fs.createReadStream(this.workCandidatesFilepath);
-      const dataStream  = new DataStreamReader();
+      const dataStream  = new SortedClusterReader();
       const writeStream = fs.createWriteStream(this.workEntitiesFilepath);
 
       dataStream.on("data", ([_, rawRecords]) => this.writeBibClusters(rawRecords, writeStream));
