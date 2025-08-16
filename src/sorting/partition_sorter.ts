@@ -30,28 +30,27 @@ export class PartitionSorter {
 
 
   sortPartitionsAsync() {
-    return Promise.all(HEX_PREFIXES.map((prefix, i) => {
+    const partitionDirectories = HEX_PREFIXES.reduce((accum: string[], prefix: string) => {
+      if (fs.existsSync(path.resolve(this.partitionsDirectory, prefix)))
+        accum.push(path.resolve(this.partitionsDirectory, prefix));
+      return accum;
+    }, []);
+
+    return Promise.all(partitionDirectories.map((directory) => {
       return new Promise((workerResolve, workerReject) => {
-        console.log(`Spawning worker for ${prefix}`);
+        console.log(`Spawning worker for ${directory}`);
 
-        const worker = new Worker(
-          path.resolve(import.meta.dirname, "sort_partition"),
-          { workerData: { partitionsDirectory: this.partitionsDirectory, prefix: prefix, index: i } }
-        );
+        const workerScriptPath = path.resolve(import.meta.dirname, "sort_partition");
+        const workerOptions    = { workerData: { directory: directory } };
+        const worker           = new Worker(workerScriptPath, workerOptions);
 
-        worker.on("message", result => {
-          console.log(result);
-        });
-
-        worker.on("error", msg => {
-          workerReject(msg);
-        });
-
+        worker.on("message", result => console.log(result));
+        worker.on("error", msg => workerReject(msg));
         worker.on('exit', (code) => {
           if (code !== 0)
             workerReject(`Stopped the Worker Thread with the exit code: ${code}`);
           else
-            workerResolve(prefix + " done")
+            workerResolve(directory + " done")
         });
       });
     }));

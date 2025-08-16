@@ -6,6 +6,19 @@ import { BufferedLineReader } from "../src/util/buffered_line_reader";
 import { HEX_PREFIXES } from "../src/sorting/data_partition_writer";
 
 
+export const SORTED_FILE_1_CONTENTS       = ["012", "013", "015", "022"];
+export const SORTED_FILE_2_CONTENTS       = ["000", "001", "013", "020"];
+export const SORTED_FILE_3_CONTENTS       = ["000", "002", "011", "022"];
+export const MERGED_FILE_1_AND_2_CONTENTS = ["000", "001", "012", "013", "013", "015", "020", "022"];
+export const MERGED_FILE_1_TO_3_CONTENTS  = [
+  "000", "000", "001", "002", "011", "012", "013", "013", "015", "020", "022", "022"
+];
+
+export const inputFile1     = path.resolve(import.meta.dirname, "support", "file-1.txt");
+export const inputFile2     = path.resolve(import.meta.dirname, "support", "file-2.txt");
+export const mergeFile1and2 = path.resolve(import.meta.dirname, "support", "merged-file-1-and-2.txt");
+
+
 export const getRawMarc = (id: string) => {
   const filepath = path.resolve(import.meta.dirname, "support", `${id}.mrc`);
   // Return a buffer so the binary MARC offsets are not shifted by mulit-byte chars.
@@ -63,9 +76,11 @@ export const deleteDataPartitionDirContents = () => {
 }
 
 
-export const createFileMockFromArray = (arr: string[], filename: string) => {
+export const createFileMockFromArray = (arr: string[], filename: string, subDirectories?: string[]) => {
   return new Promise((resolve, _) => {
-    const tmpFilepath = path.resolve(import.meta.dirname, "support", filename);
+    const tmpFilepath = subDirectories ?
+                        path.resolve(import.meta.dirname, "support", ...subDirectories, filename) :
+                        path.resolve(import.meta.dirname, "support", filename);
     const fd          = fs.openSync(tmpFilepath, "w");
     fs.writeSync(fd, arr.join("\n"));
     resolve(tmpFilepath);
