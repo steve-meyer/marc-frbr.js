@@ -17,6 +17,18 @@ type WriteStreamEntry = {
 }
 
 
+/**
+ * A writer that will spread data across hexadecimal indexed sub-directories. This class presumes that the
+ * strings it writes out begin with hexadecimal hash keys that evenly distribute data by hex numbering. It
+ * is designed for use in a file system based merge sorting algorithm for files.
+ *
+ * Instantiate with an output directory as a `string` file system path. It will then create sub-directories
+ * at that location for the sixteen single digit hexadecimal numbers 0-9, a-f.
+ *
+ * The writer's `write()` method should be given a string that begins with a hexidecimal number. It will
+ * write the supplied string value into a file within the corresponding sub-directory that matches the
+ * hex number.
+ */
 export class DataPartitionWriter {
   outputDir;
   writeStreams: Record<string, WriteStreamEntry>;

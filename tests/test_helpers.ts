@@ -3,6 +3,7 @@ import * as path from "node:path";
 import { MarcRecord } from "../src/marc/record";
 import { MarcReader } from "../src/marc/marc_reader";
 import { BufferedLineReader } from "../src/util/buffered_line_reader";
+import { HEX_PREFIXES } from "../src/sorting/data_partition_writer";
 
 
 export const getRawMarc = (id: string) => {
@@ -43,4 +44,20 @@ export const getBufferedLineReaderAndContentsWith = (filename: string): [Buffere
   while ((line = reader.next()) !== undefined) { lines.push(line); }
 
   return [reader, lines];
+}
+
+
+export const createDataPartitionDir = () => {
+  const outputDir = path.resolve(import.meta.dirname, "support", "data-partitions");
+  if (!fs.existsSync(outputDir))
+    fs.mkdirSync(outputDir);
+}
+
+
+export const deleteDataPartitionDirContents = () => {
+  const outputDir = path.resolve(import.meta.dirname, "support", "data-partitions");
+  HEX_PREFIXES.forEach((prefix: string) => {
+    if (fs.existsSync(path.join(outputDir, prefix)))
+      fs.rmSync(path.join(outputDir, prefix), { recursive: true, force: true });
+  });
 }
