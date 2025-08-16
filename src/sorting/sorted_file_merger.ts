@@ -7,6 +7,13 @@ const TARGET_COMES_AFTER  = -1,
       TARGET_IS_EQUAL     = 0;
 
 
+/**
+ * Merge two sorted files into a new file in which all contents are sorted.
+ *
+ * This class uses a buffered reader, streaming model and will maintain a small memory footprint
+ * for large input files. Internally it treats each file as a queue and reads off the top (start
+ * of the file). It assumes the input files' lines are sorted.
+ */
 export class SortedFileMerger {
   inputFilepath1: string;
   inputFilepath2: string;
@@ -20,7 +27,11 @@ export class SortedFileMerger {
   }
 
 
-  merge() {
+  /**
+   * Synchronously merge the contents of the two input files into the output file, all supplied
+   * at instantiation, and maintain overall sort order in the new file.
+   */
+  mergeSync() {
     console.log(`Starting data merge for \n  ${this.inputFilepath1} \n  ${this.inputFilepath2} \n to \n  ${this.outputFilepath}`);
     const reader1 = new BufferedLineReader(this.inputFilepath1);
     const reader2 = new BufferedLineReader(this.inputFilepath2);

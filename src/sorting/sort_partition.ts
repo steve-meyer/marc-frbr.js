@@ -15,7 +15,7 @@ while (mergeableFilepaths.length > 1) {
   const file1 = mergeableFilepaths.shift();
   const file2 = mergeableFilepaths.shift();
   if (file1 && file2)
-    new SortedFileMerger(file1, file2, outputFilepath).merge();
+    new SortedFileMerger(file1, file2, outputFilepath).mergeSync();
 
   mergeableFilepaths.push(outputFilepath);
 }

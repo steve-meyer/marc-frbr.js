@@ -61,3 +61,13 @@ export const deleteDataPartitionDirContents = () => {
       fs.rmSync(path.join(outputDir, prefix), { recursive: true, force: true });
   });
 }
+
+
+export const createFileMockFromArray = (arr: string[], filename: string) => {
+  return new Promise((resolve, _) => {
+    const tmpFilepath = path.resolve(import.meta.dirname, "support", filename);
+    const fd          = fs.openSync(tmpFilepath, "w");
+    fs.writeSync(fd, arr.join("\n"));
+    resolve(tmpFilepath);
+  });
+}
