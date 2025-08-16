@@ -39,17 +39,14 @@ describe("FileSorter", () => {
     })
     // Run the tests
     .then(async (tmpFilepath) => {
-      const sortedContents: string[] = [];
+      const fileContentAfterSorting: string[] = [];
       fs.readFileSync(tmpFilepath as string, {encoding: "utf-8"})
         .trim()
         .split("\n")
-        .forEach(line => sortedContents.push(line));
+        .forEach(line => fileContentAfterSorting.push(line));
 
-      await it("ignores blank lines", () => assert(sortedContents.length === 4));
-
-      await it("sorts the contents of the file", () => {
-        assert.deepEqual(sortedContents, SORTED_CONTENTS);
-      });
+      await it("ignores blank lines", () => assert(fileContentAfterSorting.length === 4));
+      await it("sorts the contents of the file", () => assert.deepEqual(fileContentAfterSorting, SORTED_CONTENTS));
 
       return tmpFilepath;
     })
