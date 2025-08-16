@@ -3,6 +3,7 @@ import * as path from "node:path";
 import assert from "node:assert";
 import { describe, it } from "node:test";
 import { FileSorter } from "../src/sorting/file_sorter";
+import { createFileMockFromArray } from "./test_helpers";
 
 
 const UNSORTED_CONTENTS = [
@@ -22,36 +23,33 @@ const SORTED_CONTENTS = [
   "0001e492a9b613c231a5d37e6750b2b3aa39b5ec",
 ];
 
+const tmpFilepath = path.resolve(import.meta.dirname, "support", "file-to-sort.txt");
+
 
 describe("FileSorter", () => {
   describe("sorting a file", async () => {
     // Create a file with unsorted lines
     await new Promise((resolve, _) => {
-      const tmpFilepath = path.resolve(import.meta.dirname, "support", "file-to-sort.txt");
-      const fd          = fs.openSync(tmpFilepath, "w");
-      fs.writeSync(fd, UNSORTED_CONTENTS.join("\n"));
-      resolve(tmpFilepath);
+      createFileMockFromArray(UNSORTED_CONTENTS, "file-to-sort.txt");
+      resolve("done");
     })
     // Sort the file
-    .then((tmpFilepath) => {
+    .then(() => {
       new FileSorter(tmpFilepath as string).sortSync();
-      return tmpFilepath;
     })
     // Run the tests
-    .then(async (tmpFilepath) => {
+    .then(() => {
       const fileContentAfterSorting: string[] = [];
       fs.readFileSync(tmpFilepath as string, {encoding: "utf-8"})
         .trim()
         .split("\n")
         .forEach(line => fileContentAfterSorting.push(line));
 
-      await it("ignores blank lines", () => assert(fileContentAfterSorting.length === 4));
-      await it("sorts the contents of the file", () => assert.deepEqual(fileContentAfterSorting, SORTED_CONTENTS));
-
-      return tmpFilepath;
+      it("ignores blank lines", () => assert(fileContentAfterSorting.length === 4));
+      it("sorts the contents of the file", () => assert.deepEqual(fileContentAfterSorting, SORTED_CONTENTS));
     })
     // Delete the file
-    .then((tmpFilepath) => {
+    .then(() => {
       fs.rmSync(tmpFilepath as string);
     });
   });
