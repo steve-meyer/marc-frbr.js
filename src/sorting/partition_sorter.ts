@@ -18,7 +18,7 @@ export class PartitionSorter {
     return Promise.all(fs.globSync(path.join(this.partitionsDirectory, "**/*.tsv")).map(filepath => {
       return new Promise((resolve, reject) => {
         try {
-          new FileSorter(filepath).sort();
+          new FileSorter(filepath).sortSync();
           resolve("finished");
         } catch (error) {
           console.log(error);

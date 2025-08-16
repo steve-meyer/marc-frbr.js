@@ -1,6 +1,9 @@
 import * as fs from "node:fs";
 
 
+/**
+ * Sort the lines of a plain text file.
+ */
 export class FileSorter {
   filepath: string;
   lines: string[];
@@ -12,9 +15,11 @@ export class FileSorter {
   }
 
 
-  sort() {
-    console.log(`FileSorter: ${this.filepath}`);
-
+  /**
+   * Synchronously sort the lines of the file given to the constructor. Lines delimited by
+   * newline characters. Alters the supplied file. Blank lines will be removed.
+   */
+  sortSync() {
     const sortedLines = fs.readFileSync(this.filepath, "utf8").split("\n").sort();
 
     const fd = fs.openSync(this.filepath, "w");
