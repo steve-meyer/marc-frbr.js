@@ -5,6 +5,24 @@ import { DataPartitionWriter } from "../sorting/data_partition_writer";
 import { MarcRecord } from "../marc/record";
 
 
+/**
+ * This class will reserialze data in a MARC file for clustering.
+ *
+ * Given a path to a MARC file and an output directory, it will reserialize each MARC record in the
+ * following form:
+ *
+ * `{Bib title merge key}\t{Bib JSON entry}\n`
+ *
+ * The title merge key will be a SHA1 hexadecimal hash, which is used to distribute each serialized
+ * entry evenly across sub-directories within the supplied output directory. These sub-directories
+ * are labeled as the hexadecimal digits 0-f. A MARC record with a `Bib` title merge key hash that
+ * starts with 3, for example, will be written to a file within the path
+ *
+ * `/path/to/output/dir/0/3-{file-index}.tsv`
+ *
+ * The file `file-index` is a 0-padded integer. The `DataPartitionWriter` used by this class will
+ * define the number of records per output file. See `MAX_RECORDS_PER_FILE` for the exact number.
+ */
 export class MergeKeySerializer {
   marcFilepath: string;
   outputDir: string;

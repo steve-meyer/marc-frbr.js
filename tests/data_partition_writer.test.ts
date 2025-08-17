@@ -7,7 +7,7 @@ import { createDataPartitionDir, deleteDataPartitionDirContents } from "./test_h
 
 
 describe("DataPartitionWriter", async () => {
-  before(() => createDataPartitionDir());
+  before(() => createDataPartitionDir("data-partitions"));
 
   await test("instantiation", async () => {
     after(() => deleteDataPartitionDirContents());

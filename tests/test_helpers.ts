@@ -60,8 +60,8 @@ export const getBufferedLineReaderAndContentsWith = (filename: string): [Buffere
 }
 
 
-export const createDataPartitionDir = () => {
-  const outputDir = path.resolve(import.meta.dirname, "support", "data-partitions");
+export const createDataPartitionDir = (directoryName: string) => {
+  const outputDir = path.resolve(import.meta.dirname, "support", directoryName);
   if (!fs.existsSync(outputDir))
     fs.mkdirSync(outputDir);
 }
