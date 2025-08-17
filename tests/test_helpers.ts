@@ -86,3 +86,6 @@ export const createFileMockFromArray = (arr: string[], filename: string, subDire
     resolve(tmpFilepath);
   });
 }
+
+
+export const fileLinesAsArray = (filepath: string) => fs.readFileSync(filepath, {encoding: "utf-8"}).trim().split("\n");
