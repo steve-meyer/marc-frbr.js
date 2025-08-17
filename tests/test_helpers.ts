@@ -50,7 +50,7 @@ export const readMarcFromStream = async (filename: string): Promise<MarcRecord[]
 
 
 export const getBufferedLineReaderAndContentsWith = (filename: string): [BufferedLineReader, string[]] => {
-  const filepath = path.resolve(import.meta.dirname, "support", filename);
+  const filepath = path.resolve(import.meta.dirname, "support", "plain-text-lines", filename);
   const reader = new BufferedLineReader(filepath);
   const lines: string[] = [];
   let line: (string|undefined);

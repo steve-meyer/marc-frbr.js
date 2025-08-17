@@ -16,7 +16,7 @@ describe("SortedClusterReader", async () => {
     await new Promise((resolve, reject) => {
 
       const parsedRecords: cluster[] = [];
-      const filepath   = path.resolve(import.meta.dirname, "support", "cluster-file.tsv");
+      const filepath   = path.resolve(import.meta.dirname, "support", "plain-text-lines", "cluster-file.tsv");
       const readStream = fs.createReadStream(filepath);
       const dataStream = new SortedClusterReader();
 

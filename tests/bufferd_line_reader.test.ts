@@ -63,7 +63,7 @@ describe("BufferedLineReader", () => {
 
   describe("reading files with lines larger than the read chunk size", () => {
     const [reader, lines] = getBufferedLineReaderAndContentsWith("large-line-three-times.txt");
-    const filepath = path.resolve(import.meta.dirname, "support", "large-line.txt");
+    const filepath = path.resolve(import.meta.dirname, "support", "plain-text-lines", "large-line.txt");
     const expected = fs.readFileSync(filepath, "utf8").trim();
 
     it("has the correct number of lines", () => assert(lines.length === 3));
@@ -73,7 +73,7 @@ describe("BufferedLineReader", () => {
 
 
   describe("mannually closing the file", () => {
-    const filepath = path.resolve(import.meta.dirname, "support", "one-two-three.txt");
+    const filepath = path.resolve(import.meta.dirname, "support", "plain-text-lines", "one-two-three.txt");
     const reader = new BufferedLineReader(filepath);
 
     let line = reader.next();
