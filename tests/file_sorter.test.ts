@@ -3,7 +3,7 @@ import * as path from "node:path";
 import assert from "node:assert";
 import { describe, it } from "node:test";
 import { FileSorter } from "../src/sorting/file_sorter";
-import { createFileMockFromArray } from "./test_helpers";
+import { createFileMockFromArray, fileLinesAsArray } from "./test_helpers";
 
 
 const UNSORTED_CONTENTS = [
@@ -39,11 +39,7 @@ describe("FileSorter", () => {
     })
     // Run the tests
     .then(() => {
-      const fileContentAfterSorting: string[] = [];
-      fs.readFileSync(tmpFilepath as string, {encoding: "utf-8"})
-        .trim()
-        .split("\n")
-        .forEach(line => fileContentAfterSorting.push(line));
+      const fileContentAfterSorting = fileLinesAsArray(tmpFilepath);
 
       it("ignores blank lines", () => assert(fileContentAfterSorting.length === 4));
       it("sorts the contents of the file", () => assert.deepEqual(fileContentAfterSorting, SORTED_CONTENTS));

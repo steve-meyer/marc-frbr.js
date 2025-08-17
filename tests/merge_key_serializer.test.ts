@@ -4,7 +4,7 @@ import assert from "node:assert";
 import { describe, it } from "node:test";
 import { MergeKeySerializer } from "../src/cluster/merge_key_serializer";
 import { MarcRecord } from "../src/marc/record";
-import { createDataPartitionDir } from "./test_helpers";
+import { createDataPartitionDir, fileLinesAsArray } from "./test_helpers";
 
 
 const marcFilepath = path.resolve(import.meta.dirname, "support", "three-records.mrc");
@@ -17,13 +17,12 @@ describe("MergeKeySerializer", () => {
     const serializer = new MergeKeySerializer(marcFilepath, outputDir);
 
     await serializer.generateAsync().then(async () => {
-      const fileContentAfterReserializing: string[] = [];
+      let fileContentAfterReserializing: string[] = [];
       const generatedFiles = fs.globSync(path.resolve(outputDir, "**/*.tsv"));
       generatedFiles.forEach(filepath => {
-        fs.readFileSync(filepath, {encoding: "utf-8"})
-          .trim()
-          .split("\n")
-          .forEach(line => {if (line.trim() !== "") fileContentAfterReserializing.push(line)});
+        fileContentAfterReserializing = fileContentAfterReserializing.concat(
+          fileLinesAsArray(filepath).filter(line => line.trim() !== "")
+        );
       });
 
       await it("has a reserialized line per MARC record", () => assert(fileContentAfterReserializing.length === 3));

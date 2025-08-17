@@ -9,7 +9,8 @@ import {
   inputFile1,
   inputFile2,
   mergeFile1and2,
-  createFileMockFromArray
+  createFileMockFromArray,
+  fileLinesAsArray
 } from "./test_helpers";
 
 
@@ -27,11 +28,7 @@ describe("SortedFileMerger", () => {
     })
     // Run the tests
     .then(() => {
-      const fileContentAfterMerging: string[] = [];
-      fs.readFileSync(mergeFile1and2 as string, {encoding: "utf-8"})
-        .trim()
-        .split("\n")
-        .forEach(line => fileContentAfterMerging.push(line));
+      const fileContentAfterMerging = fileLinesAsArray(mergeFile1and2);
 
       it("has all entries from the input files (including duplicates)", () => {
         assert(fileContentAfterMerging.length === 8);
