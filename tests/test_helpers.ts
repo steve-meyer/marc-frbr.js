@@ -20,7 +20,7 @@ export const mergeFile1and2 = path.resolve(import.meta.dirname, "support", "merg
 
 
 export const getRawMarc = (id: string) => {
-  const filepath = path.resolve(import.meta.dirname, "support", `${id}.mrc`);
+  const filepath = path.resolve(import.meta.dirname, "support", "marc", `${id}.mrc`);
   // Return a buffer so the binary MARC offsets are not shifted by mulit-byte chars.
   return fs.readFileSync(filepath);
 }
@@ -33,7 +33,7 @@ export const getMarcRecord = (id: string) => {
 
 
 export const readMarcFromStream = async (filename: string): Promise<MarcRecord[]> => {
-  const filepath   = path.resolve(import.meta.dirname, "support", filename);
+  const filepath   = path.resolve(import.meta.dirname, "support", "marc", filename);
   const stream     = fs.createReadStream(filepath);
   const marcReader = new MarcReader();
 

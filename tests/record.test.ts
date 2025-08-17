@@ -41,7 +41,7 @@ describe("Record", () => {
     });
 
     it("prints in MARC record view", () => {
-      const filepath = path.resolve(import.meta.dirname, "support", `991023163396102122.txt`);
+      const filepath = path.resolve(import.meta.dirname, "support", "marc", "991023163396102122.txt");
       const expected = fs.readFileSync(filepath, "utf8");
       assert(record.toString() === expected);
     });

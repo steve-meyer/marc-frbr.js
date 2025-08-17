@@ -48,6 +48,7 @@ export class MergeKeySerializer {
 
       marcReader.on("data", (record) => this.#processData(record));
       marcReader.on("end", this.#reportStats);
+      marcReader.on("error", (err: Error) => reject(err));
       marcReader.on("finish", () => {
         resolve(`Work entity candidate reserialization complete for ${this.recordCount} bib records.`);
       });

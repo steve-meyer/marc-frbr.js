@@ -7,7 +7,7 @@ import { MarcRecord } from "../src/marc/record";
 import { createDataPartitionDir, fileLinesAsArray } from "./test_helpers";
 
 
-const marcFilepath = path.resolve(import.meta.dirname, "support", "three-records.mrc");
+const marcFilepath = path.resolve(import.meta.dirname, "support", "marc", "three-records.mrc");
 const outputDir    = path.resolve(import.meta.dirname, "support", "reserializer");
 
 
