@@ -14,10 +14,13 @@ export class WorkSetsGenerator {
 
 
   clusterAsync() {
-    return Promise.all(HEX_PREFIXES.map((prefix: string) => {
+    return Promise.all(HEX_PREFIXES.map((prefix: string, i: number) => {
       return new Promise((resolve, reject) => {
         const workCandidatesFilepath = fs.globSync(path.join(this.partitionsDirectory, prefix, "merge*.tsv"))[0];
-        const workEntitiesFilepath   = path.join(this.partitionsDirectory, `${prefix}-work-entities.jsonl`);
+        const workEntitiesFilepath   = path.join(
+          this.partitionsDirectory,
+          `work-entities-${("" + (i + 1)).padStart(2, "0")}.jsonl`
+        );
 
         const worker = new Worker(
           path.resolve(import.meta.dirname, "process_work_candidates"),
@@ -34,5 +37,12 @@ export class WorkSetsGenerator {
         });
       });
     }));
+  }
+
+
+  cleanUpSync() {
+    HEX_PREFIXES.forEach(prefix => {
+      fs.rmSync(path.join(this.partitionsDirectory, prefix), { recursive: true, force: true });
+    });
   }
 }

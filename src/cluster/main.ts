@@ -14,4 +14,5 @@ serializer.generateAsync()
   .then(() => sorter.sortPartitionFilesAsync())
   .then(() => sorter.sortPartitionsAsync())
   .then(() => generator.clusterAsync())
+  .then(() => generator.cleanUpSync())
   .catch((err: Error) => console.error(err));
