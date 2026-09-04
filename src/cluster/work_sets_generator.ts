@@ -1,7 +1,7 @@
 import * as fs from "node:fs";
 import * as path from "node:path";
 import { Worker } from "node:worker_threads";
-import { HEX_PREFIXES } from "../sorting/data_partition_writer";
+import { HEX_PREFIXES } from "../sorting/data_partition_writer.js";
 
 
 export class WorkSetsGenerator {

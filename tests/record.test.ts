@@ -2,8 +2,8 @@ import * as fs from "node:fs";
 import * as path from "node:path";
 import assert from "node:assert";
 import { describe, it } from "node:test";
-import { MarcRecord } from "../src/marc/record";
-import { getMarcRecord } from "./test_helpers";
+import { MarcRecord } from "../src/marc/record.js";
+import { getMarcRecord } from "./test_helpers.js";
 
 
 describe("Record", () => {

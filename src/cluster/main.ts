@@ -1,6 +1,6 @@
-import { MergeKeySerializer } from "./merge_key_serializer";
-import { PartitionSorter } from "../sorting/partition_sorter";
-import { WorkSetsGenerator } from "./work_sets_generator";
+import { MergeKeySerializer } from "./merge_key_serializer.js";
+import { PartitionSorter } from "../sorting/partition_sorter.js";
+import { WorkSetsGenerator } from "./work_sets_generator.js";
 
 
 const marcFilepath = process.argv[2];

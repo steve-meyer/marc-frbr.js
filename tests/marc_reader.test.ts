@@ -1,7 +1,7 @@
 import assert from "node:assert";
 import { describe, it } from "node:test";
-import { MarcRecord } from "../src/marc/record";
-import { readMarcFromStream } from "./test_helpers";
+import { MarcRecord } from "../src/marc/record.js";
+import { readMarcFromStream } from "./test_helpers.js";
 
 
 describe("MarcReader", () => {

@@ -2,8 +2,8 @@ import * as fs from "node:fs";
 import * as path from "node:path";
 import assert from "node:assert";
 import test, { before, after, describe, it } from "node:test";
-import { DataPartitionWriter, HEX_PREFIXES } from "../src/sorting/data_partition_writer";
-import { createDataPartitionDir, deleteDataPartitionDirContents } from "./test_helpers";
+import { DataPartitionWriter, HEX_PREFIXES } from "../src/sorting/data_partition_writer.js";
+import { createDataPartitionDir, deleteDataPartitionDirContents } from "./test_helpers.js";
 
 
 describe("DataPartitionWriter", async () => {

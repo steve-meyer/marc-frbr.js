@@ -1,8 +1,8 @@
 import * as fs from "node:fs";
-import { MarcReader } from "../marc/marc_reader";
-import { Bib } from "../frbr/bib";
-import { DataPartitionWriter } from "../sorting/data_partition_writer";
-import { MarcRecord } from "../marc/record";
+import { MarcReader } from "../marc/marc_reader.js";
+import { Bib } from "../frbr/bib.js";
+import { DataPartitionWriter } from "../sorting/data_partition_writer.js";
+import { MarcRecord } from "../marc/record.js";
 
 
 /**

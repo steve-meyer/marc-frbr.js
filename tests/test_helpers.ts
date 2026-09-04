@@ -1,9 +1,9 @@
 import * as fs from "node:fs";
 import * as path from "node:path";
-import { MarcRecord } from "../src/marc/record";
-import { MarcReader } from "../src/marc/marc_reader";
-import { BufferedLineReader } from "../src/util/buffered_line_reader";
-import { HEX_PREFIXES } from "../src/sorting/data_partition_writer";
+import { MarcRecord } from "../src/marc/record.js";
+import { MarcReader } from "../src/marc/marc_reader.js";
+import { BufferedLineReader } from "../src/util/buffered_line_reader.js";
+import { HEX_PREFIXES } from "../src/sorting/data_partition_writer.js";
 
 
 export const SORTED_FILE_1_CONTENTS       = ["012", "013", "015", "022"];

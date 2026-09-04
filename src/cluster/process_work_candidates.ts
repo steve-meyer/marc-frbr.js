@@ -1,5 +1,5 @@
 import { workerData, parentPort } from "node:worker_threads";
-import { WorkGenerator } from "./work_generator";
+import { WorkGenerator } from "./work_generator.js";
 
 await new WorkGenerator(
   workerData.workCandidatesFilepath,

@@ -1,7 +1,7 @@
 import * as fs from "node:fs";
 import assert from "node:assert";
 import { describe, it } from "node:test";
-import { SortedFileMerger } from "../src/sorting/sorted_file_merger";
+import { SortedFileMerger } from "../src/sorting/sorted_file_merger.js";
 import {
   SORTED_FILE_1_CONTENTS,
   SORTED_FILE_2_CONTENTS,
@@ -11,7 +11,7 @@ import {
   mergeFile1and2,
   createFileMockFromArray,
   fileLinesAsArray
-} from "./test_helpers";
+} from "./test_helpers.js";
 
 
 describe("SortedFileMerger", () => {

@@ -1,5 +1,5 @@
 import { Transform } from "node:stream";
-import { MarcRecord, END_OF_RECORD } from "./record";
+import { MarcRecord, END_OF_RECORD } from "./record.js";
 
 
 export class MarcReader extends Transform {

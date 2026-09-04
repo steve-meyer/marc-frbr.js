@@ -1,7 +1,7 @@
 import * as fs from "node:fs";
 import * as path from "node:path";
 import { workerData, parentPort } from "node:worker_threads";
-import { SortedFileMerger } from "./sorted_file_merger";
+import { SortedFileMerger } from "./sorted_file_merger.js";
 
 
 const mergeableFilepaths  = fs.globSync(path.join(workerData.directory, "*.tsv")).sort();

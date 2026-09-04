@@ -1,5 +1,5 @@
-import { DataField } from "./data_field";
-import { Subfield } from "./subfield";
+import { DataField } from "./data_field.js";
+import { Subfield } from "./subfield.js";
 
 
 const LEADER_LENGTH          = 24;

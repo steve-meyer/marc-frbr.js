@@ -2,7 +2,7 @@ import * as path from "node:path";
 import * as fs from "node:fs";
 import assert from "node:assert";
 import { describe, it } from "node:test";
-import { SortedClusterReader } from "../src/util/sorted_cluster_reader";
+import { SortedClusterReader } from "../src/util/sorted_cluster_reader.js";
 
 
 type cluster = {
@@ -40,7 +40,7 @@ describe("SortedClusterReader", async () => {
       });
 
       it("returns the clustered records as strings (client is responsible for parsing)", () => {
-        parsedRecords.flatMap((cluster: cluster) => cluster.records).forEach(record => assert(typeof record === "string"));
+        parsedRecords.flatMap((cluster: cluster) => cluster.records).forEach((record: string) => assert(typeof record === "string"));
       });
 
       it("has the correct cluster records", () => {

@@ -2,8 +2,8 @@ import * as fs from "node:fs";
 import * as path from "node:path";
 import assert from "node:assert";
 import { describe, it } from "node:test";
-import { getBufferedLineReaderAndContentsWith } from "./test_helpers";
-import { BufferedLineReader } from "../src/util/buffered_line_reader";
+import { getBufferedLineReaderAndContentsWith } from "./test_helpers.js";
+import { BufferedLineReader } from "../src/util/buffered_line_reader.js";
 
 
 describe("BufferedLineReader", () => {

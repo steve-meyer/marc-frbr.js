@@ -1,7 +1,8 @@
 {
   "compilerOptions": {
-    "module": "es2022",
-    "moduleResolution": "node"
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "types": ["node"]
   },
   "extends": "@tsconfig/node24/tsconfig.json",
   "include": [

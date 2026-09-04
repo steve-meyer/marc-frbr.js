@@ -1,7 +1,7 @@
 import assert from "node:assert";
 import { describe, it } from "node:test";
-import { getMarcRecord } from "./test_helpers";
-import { Bib } from "../src/frbr/bib";
+import { getMarcRecord } from "./test_helpers.js";
+import { Bib } from "../src/frbr/bib.js";
 
 
 describe("Bib", () => {

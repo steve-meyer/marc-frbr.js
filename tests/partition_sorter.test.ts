@@ -2,14 +2,14 @@ import * as fs from "node:fs";
 import * as path from "node:path";
 import assert from "node:assert";
 import { before, describe, it } from "node:test";
-import { PartitionSorter } from "../src/sorting/partition_sorter";
+import { PartitionSorter } from "../src/sorting/partition_sorter.js";
 import {
   SORTED_FILE_1_CONTENTS,
   SORTED_FILE_2_CONTENTS,
   SORTED_FILE_3_CONTENTS,
   MERGED_FILE_1_TO_3_CONTENTS,
   createFileMockFromArray
-} from "./test_helpers";
+} from "./test_helpers.js";
 
 
 // const partitionDir    = path.resolve(import.meta.dirname, "support", "data-partitions");

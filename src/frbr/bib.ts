@@ -1,5 +1,5 @@
 import { createHash } from "node:crypto";
-import { MarcRecord } from "../marc/record";
+import { MarcRecord } from "../marc/record.js";
 
 
 export class Bib {

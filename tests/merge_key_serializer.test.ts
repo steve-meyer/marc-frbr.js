@@ -2,9 +2,9 @@ import * as fs from "node:fs";
 import * as path from "node:path";
 import assert from "node:assert";
 import { describe, it } from "node:test";
-import { MergeKeySerializer } from "../src/cluster/merge_key_serializer";
-import { MarcRecord } from "../src/marc/record";
-import { createDataPartitionDir, fileLinesAsArray } from "./test_helpers";
+import { MergeKeySerializer } from "../src/cluster/merge_key_serializer.js";
+import { MarcRecord } from "../src/marc/record.js";
+import { createDataPartitionDir, fileLinesAsArray } from "./test_helpers.js";
 
 
 const marcFilepath = path.resolve(import.meta.dirname, "support", "marc", "three-records.mrc");

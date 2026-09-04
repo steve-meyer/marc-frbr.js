@@ -1,5 +1,5 @@
 import * as fs from "node:fs";
-import { SortedClusterReader } from "../util/sorted_cluster_reader";
+import { SortedClusterReader } from "../util/sorted_cluster_reader.js";
 
 
 export class WorkGenerator {

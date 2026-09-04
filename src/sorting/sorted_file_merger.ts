@@ -1,5 +1,5 @@
 import * as fs from "node:fs";
-import { BufferedLineReader } from "../util/buffered_line_reader";
+import { BufferedLineReader } from "../util/buffered_line_reader.js";
 
 
 const TARGET_COMES_AFTER  = -1,

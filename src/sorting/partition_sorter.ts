@@ -1,8 +1,8 @@
 import * as fs from "node:fs";
 import * as path from "node:path";
 import { Worker } from "node:worker_threads";
-import { HEX_PREFIXES } from "./data_partition_writer";
-import { FileSorter } from "./file_sorter";
+import { HEX_PREFIXES } from "./data_partition_writer.js";
+import { FileSorter } from "./file_sorter.js";
 
 
 export class PartitionSorter {
@@ -40,7 +40,7 @@ export class PartitionSorter {
       return new Promise((workerResolve, workerReject) => {
         console.log(`Spawning worker for ${directory}`);
 
-        const workerScriptPath = path.resolve(import.meta.dirname, "sort_partition");
+        const workerScriptPath = path.resolve(import.meta.dirname, "sort_partition.js");
         const workerOptions    = { workerData: { directory: directory } };
         const worker           = new Worker(workerScriptPath, workerOptions);
 

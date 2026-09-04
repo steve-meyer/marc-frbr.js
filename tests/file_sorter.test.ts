@@ -2,8 +2,8 @@ import * as fs from "node:fs";
 import * as path from "node:path";
 import assert from "node:assert";
 import { describe, it } from "node:test";
-import { FileSorter } from "../src/sorting/file_sorter";
-import { createFileMockFromArray, fileLinesAsArray } from "./test_helpers";
+import { FileSorter } from "../src/sorting/file_sorter.js";
+import { createFileMockFromArray, fileLinesAsArray } from "./test_helpers.js";
 
 
 const UNSORTED_CONTENTS = [

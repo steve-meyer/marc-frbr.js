@@ -2,8 +2,8 @@ import * as fs from "node:fs";
 import * as path from "node:path";
 import assert from "node:assert";
 import { describe, it } from "node:test";
-import { WorkGenerator } from "../src/cluster/work_generator";
-import { fileLinesAsArray } from "./test_helpers";
+import { WorkGenerator } from "../src/cluster/work_generator.js";
+import { fileLinesAsArray } from "./test_helpers.js";
 
 
 const workCandidatesFilepath = path.resolve(
@@ -31,11 +31,11 @@ describe("WorkGenerator", () => {
 
         it("contains all three source records", () => {
           const expected = ["9994631293602122", "9969396263602122", "9913310673402121"];
-          assert.deepEqual(work.map(b => b.id), expected);
+          assert.deepEqual(work.map((bib: { id: string }) => bib.id), expected);
         });
 
         it("has Bib objects as members", () => {
-          work.forEach(bib => assert(bib.type === "Bib"));
+          work.forEach((bib: { type: string }) => assert(bib.type === "Bib"));
         });
       });
     }).then(() => {
