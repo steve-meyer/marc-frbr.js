@@ -8,7 +8,7 @@ await esbuild.build({
   minify: true,
   platform: "node",
   format: "esm",
-  outfile: "dist/sort_partition.js",
+  outfile: "dist/bin/sort_partition.js",
 });
 
 await esbuild.build({
@@ -17,7 +17,7 @@ await esbuild.build({
   minify: true,
   platform: "node",
   format: "esm",
-  outfile: "dist/process_work_candidates.js",
+  outfile: "dist/bin/process_work_candidates.js",
 });
 
 // MAIN FOR CLUSTERING
@@ -28,5 +28,5 @@ await esbuild.build({
   minify: true,
   platform: "node",
   format: "esm",
-  outfile: "dist/main.js",
+  outfile: "dist/bin/main.js",
 });

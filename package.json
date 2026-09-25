@@ -1,11 +1,17 @@
 {
   "name": "marc-frbr.js",
-  "version": "0.3.0",
-  "description": "FRBR style clustering for MARC cataloging records.",
+  "version": "0.4.0",
+  "description": "MARC parsing library with FRBR style clustering.",
   "type": "module",
-  "main": "dist/main.js",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    "import": "./dist/lib/index.js",
+    "types": "./dist/lib/index.d.ts"
+  },
   "scripts": {
-    "build": "npm test && node --experimental-strip-types build.ts",
+    "build": "tsc && npm test && node --experimental-strip-types build.ts",
     "test": "node --import tsx --test tests/**/*.test.ts"
   },
   "keywords": [
@@ -19,7 +25,6 @@
   "author": "Steve Meyer",
   "license": "MIT",
   "devDependencies": {
-    "@tsconfig/node24": "^24.0.1",
     "@types/node": "^24.2.1",
     "esbuild": "^0.25.8",
     "tsx": "^4.20.3",

@@ -1,11 +1,25 @@
 {
   "compilerOptions": {
+    "strict": true,
+    "sourceMap": true,
+    "noImplicitAny": true,
     "module": "nodenext",
     "moduleResolution": "nodenext",
-    "types": ["node"]
+    "declaration": true,
+    "target": "esnext",
+    "types": ["node"],
+    "rootDir": "./src",
+    "outDir": "./dist/lib/",
   },
-  "extends": "@tsconfig/node24/tsconfig.json",
   "include": [
-    "src/**/*"
-  ]
+    "src/frbr/*",
+    "src/marc/*",
+    "src/util/*",
+  ],
+  "exclude": [
+    "./src/cluster/",
+    "./tests/",
+    "./node_modules/",
+    "./dist/",
+  ],
 }
