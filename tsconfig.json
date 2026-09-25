@@ -15,6 +15,7 @@
     "src/frbr/*",
     "src/marc/*",
     "src/util/*",
+    "src/index.ts",
   ],
   "exclude": [
     "./src/cluster/",
